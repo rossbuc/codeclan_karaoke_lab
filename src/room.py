@@ -14,3 +14,6 @@ class Room:
         for guest in self.guests_in_room:
             if guest.name == guest_to_remove.name:
                self.guests_in_room.remove(guest) 
+
+    def add_song_to_playlist(self, song_to_add):
+        self.playlist.append(song_to_add)

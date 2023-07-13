@@ -29,3 +29,8 @@ class TestRoom(unittest.TestCase):
     def test_guest_checked_out(self):
         self.room.check_out_guest(self.guest)
         self.assertEqual(False, self.guest in self.room.guests_in_room)
+
+    def test_song_added_to_playlist(self):
+        song = Song("Last Dance", "Donna Summer")
+        self.room.add_song_to_playlist(song)
+        self.assertEqual(True, song in self.room.playlist)
