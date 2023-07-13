@@ -7,5 +7,10 @@ class Room:
         self.playlist = playlist
         self.guests_in_room = []
 
-    def check_in_guest(self, guest):
-        self.guests_in_room.append(guest)
+    def check_in_guest(self, guest_to_add):
+        self.guests_in_room.append(guest_to_add)
+
+    def check_out_guest(self, guest_to_remove):
+        for guest in self.guests_in_room:
+            if guest.name == guest_to_remove.name:
+               self.guests_in_room.remove(guest) 
