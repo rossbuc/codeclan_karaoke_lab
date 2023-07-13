@@ -48,3 +48,7 @@ class TestRoom(unittest.TestCase):
         self.room.capacity = 0
         self.room.check_in_guest(self.guest)
         self.assertEqual("Sorry! This room is at capacity", self.room.check_in_guest(self.guest))
+
+    def test_guest_paid_entry(self):
+        self.room.charge_guest_entry(self.guest)
+        self.assertEqual(20, self.room.till)

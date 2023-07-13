@@ -6,6 +6,7 @@ class Room:
         self.entry_fee = entry_fee
         self.playlist = playlist
         self.guests_in_room = []
+        self.till = 0
 
     def check_in_guest(self, guest_to_add):
         if len(self.guests_in_room) < self.capacity:
@@ -20,3 +21,7 @@ class Room:
 
     def add_song_to_playlist(self, song_to_add):
         self.playlist.append(song_to_add)
+
+    def charge_guest_entry(self, guest):
+        guest.pay_entry(self.entry_fee)
+        self.till += self.entry_fee
