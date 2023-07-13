@@ -8,7 +8,10 @@ class Room:
         self.guests_in_room = []
 
     def check_in_guest(self, guest_to_add):
-        self.guests_in_room.append(guest_to_add)
+        if len(self.guests_in_room) < self.capacity:
+            self.guests_in_room.append(guest_to_add)
+        else:
+            return "Sorry! This room is at capacity"
 
     def check_out_guest(self, guest_to_remove):
         for guest in self.guests_in_room:

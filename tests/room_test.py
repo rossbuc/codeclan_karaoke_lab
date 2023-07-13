@@ -27,6 +27,7 @@ class TestRoom(unittest.TestCase):
         self.assertEqual("Gary", self.room.guests_in_room[0].name)
 
     def test_guest_checked_out(self):
+        self.room.check_in_guest(self.guest)
         self.room.check_out_guest(self.guest)
         self.assertEqual(False, self.guest in self.room.guests_in_room)
 
@@ -34,3 +35,16 @@ class TestRoom(unittest.TestCase):
         song = Song("Last Dance", "Donna Summer")
         self.room.add_song_to_playlist(song)
         self.assertEqual(True, song in self.room.playlist)
+
+    def test_guest_refused_if_room_at_capacity(self):
+        self.room_1 = Room("The Candi Suite", 1, 30, [])
+        self.guest_1 = Guest("Dan", Song("Relight My Fire", "Dan Hartman"), 50)
+        self.guest_2 = Guest("Terry", Song("Relight My Fire", "Dan Hartman"), 50)
+        self.room_1.check_in_guest(self.guest_1)
+        self.room_1.check_in_guest(self.guest_2)
+        self.assertEqual(False, self.guest_2 in self.room_1.guests_in_room)
+       
+    def test_refusal_message(self):
+        self.room.capacity = 0
+        self.room.check_in_guest(self.guest)
+        self.assertEqual("Sorry! This room is at capacity", self.room.check_in_guest(self.guest))
