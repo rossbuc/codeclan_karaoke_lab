@@ -13,9 +13,9 @@ class TestRoom(unittest.TestCase):
             Song("Million Dollar Bill", "Whitney Houston"),
             Song("I Wanna Dance With Somebody", "Whitney Houston")
             ]
-        drinks_list = {"Beer": 4, "Glass of Wine": 4, "Bottle of wine": 20, "Spirit Mixer": 3}
+        self.drinks_list = {"Beer": 4, "Glass of Wine": 4, "Bottle of wine": 20, "Spirit Mixer": 3}
         self.guest = Guest("Gary", Song("Let The Music Play", "Barry White"), 80)
-        self.room = Room("Houston Room", 50, 20, song_list, Bar(drinks_list))
+        self.room = Room("Houston Room", 50, 20, song_list, Bar(self.drinks_list))
 
     def test_room_has_name(self):
         self.assertEqual("Houston Room", self.room.name)
@@ -44,7 +44,7 @@ class TestRoom(unittest.TestCase):
         self.assertEqual(True, song in self.room.playlist)
 
     def test_guest_refused_if_room_at_capacity(self):
-        self.room_1 = Room("The Candi Suite", 1, 30, [], None)
+        self.room_1 = Room("The Candi Suite", 1, 30, [], Bar(self.drinks_list))
         self.guest_1 = Guest("Dan", Song("Relight My Fire", "Dan Hartman"), 50)
         self.guest_2 = Guest("Terry", Song("Relight My Fire", "Dan Hartman"), 50)
         self.room_1.check_in_guest(self.guest_1)
@@ -63,3 +63,7 @@ class TestRoom(unittest.TestCase):
     def test_entry_fees_added_to_tab(self):
         self.room.charge_guest_entry(self.guest)
         self.assertEqual([("Entry Fee", 20)], self.room.bar.tab)
+
+    def test_entry_charged_on_check_in(self):
+        self.room.check_in_guest(self.guest)
+        self.assertEqual(60, self.guest.money)

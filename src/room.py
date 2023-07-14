@@ -10,6 +10,7 @@ class Room:
 
     def check_in_guest(self, guest_to_add):
         if len(self.guests_in_room) < self.capacity:
+            self.charge_guest_entry(guest_to_add)
             self.guests_in_room.append(guest_to_add)
         else:
             return "Sorry! This room is at capacity"
