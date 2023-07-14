@@ -7,6 +7,9 @@ class Guest:
     def pay_entry(self, fee):
         self.money -= fee
 
+    def buy_drink(self, price):
+        self.money -= price
+
     def fav_song_in_playlist(self, room):
         for song in room.playlist:
             if song.name == self.fav_song.name:

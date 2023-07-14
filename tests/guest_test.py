@@ -35,3 +35,7 @@ class TestGuest(unittest.TestCase):
 
     def test_no_wooh_if_no_fav_song_in_playlist(self):
         self.assertEqual(None, self.guest.fav_song_in_playlist(self.room))
+
+    def test_drink_price_removed_from_money(self):
+        self.guest.buy_drink(4)
+        self.assertEqual(196, self.guest.money)
