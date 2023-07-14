@@ -25,3 +25,4 @@ class Room:
     def charge_guest_entry(self, guest):
         guest.pay_entry(self.entry_fee)
         self.bar.till += self.entry_fee
+        self.bar.tab.append(("Entry Fee", self.entry_fee))

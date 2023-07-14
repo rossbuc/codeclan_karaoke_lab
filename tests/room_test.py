@@ -59,3 +59,7 @@ class TestRoom(unittest.TestCase):
     def test_guest_paid_entry(self):
         self.room.charge_guest_entry(self.guest)
         self.assertEqual(20, self.room.bar.till)
+
+    def test_entry_fees_added_to_tab(self):
+        self.room.charge_guest_entry(self.guest)
+        self.assertEqual([("Entry Fee", 20)], self.room.bar.tab)
