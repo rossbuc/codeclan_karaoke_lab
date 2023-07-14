@@ -1,14 +1,21 @@
 from src.room import Room
 from src.song import Song
 from src.guest import Guest
+from src.bar import Bar
 import unittest
 
 
 class TestRoom(unittest.TestCase):
     
     def setUp(self):
+        song_list = [
+            Song("How Will I Know", "Whitney Houston"),
+            Song("Million Dollar Bill", "Whitney Houston"),
+            Song("I Wanna Dance With Somebody", "Whitney Houston")
+            ]
+        drinks_list = {"Beer": 4, "Glass of Wine": 4, "Bottle of wine": 20, "Spirit Mixer": 3}
         self.guest = Guest("Gary", Song("Let The Music Play", "Barry White"), 80)
-        self.room = Room("Houston Room", 50, 20, [Song("How Will I Know", "Whitney Houston"), Song("Million Dollar Bill", "Whitney Houston"), Song("I Wanna Dance With Somebody", "Whitney Houston")])
+        self.room = Room("Houston Room", 50, 20, song_list, Bar(drinks_list))
 
     def test_room_has_name(self):
         self.assertEqual("Houston Room", self.room.name)
@@ -37,7 +44,7 @@ class TestRoom(unittest.TestCase):
         self.assertEqual(True, song in self.room.playlist)
 
     def test_guest_refused_if_room_at_capacity(self):
-        self.room_1 = Room("The Candi Suite", 1, 30, [])
+        self.room_1 = Room("The Candi Suite", 1, 30, [], None)
         self.guest_1 = Guest("Dan", Song("Relight My Fire", "Dan Hartman"), 50)
         self.guest_2 = Guest("Terry", Song("Relight My Fire", "Dan Hartman"), 50)
         self.room_1.check_in_guest(self.guest_1)
@@ -51,4 +58,4 @@ class TestRoom(unittest.TestCase):
 
     def test_guest_paid_entry(self):
         self.room.charge_guest_entry(self.guest)
-        self.assertEqual(20, self.room.till)
+        self.assertEqual(20, self.room.bar.till)

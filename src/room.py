@@ -1,12 +1,12 @@
 class Room:
     
-    def __init__(self, name, capacity, entry_fee, playlist):
+    def __init__(self, name, capacity, entry_fee, playlist, bar):
         self.name = name
         self.capacity = capacity
         self.entry_fee = entry_fee
         self.playlist = playlist
         self.guests_in_room = []
-        self.till = 0
+        self.bar = bar
 
     def check_in_guest(self, guest_to_add):
         if len(self.guests_in_room) < self.capacity:
@@ -24,4 +24,4 @@ class Room:
 
     def charge_guest_entry(self, guest):
         guest.pay_entry(self.entry_fee)
-        self.till += self.entry_fee
+        self.bar.till += self.entry_fee
