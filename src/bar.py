@@ -5,8 +5,10 @@ class Bar:
         self.tab = []
         self.till = 0
 
-    def sell_drink(self, order):
+    def sell_drink(self, guest, order):
         for drink in self.drinks_list:
             if drink == order:
                 self.tab.append((drink, self.drinks_list[drink]))
                 self.till += self.drinks_list[drink]
+                guest.buy_drink(self.drinks_list[drink])
+                
